@@ -32,29 +32,30 @@ const App = () => {
   let startIndex = (page - 1) * cardsPerPage;
   let endIndex = startIndex + cardsPerPage;
 
-  const handleFetchNews = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch("http://localhost:5000/api/news", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ searchText, selectedCategories }),
-      });
-      const data = await response.json();
-      setArticles(data);
-      setDisplayedCards(data.slice(startIndex, endIndex));
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching news:", error);
-      setLoading(false);
-    }
-  };
+ 
 
   useEffect(() => {
+    const handleFetchNews = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("http://localhost:5000/api/news", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ searchText, selectedCategories }),
+        });
+        const data = await response.json();
+        setArticles(data);
+        setDisplayedCards(data.slice(startIndex, endIndex));
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching news:", error);
+        setLoading(false);
+      }
+    };
     handleFetchNews();
-  }, [selectedCategories, searchText]);
+  }, [selectedCategories, searchText,startIndex,endIndex]);
 
   const handlePageChange = (event, value) => {
     setPage(value);
