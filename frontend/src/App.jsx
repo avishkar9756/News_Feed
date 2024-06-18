@@ -36,13 +36,16 @@ const App = () => {
     const handleFetchNews = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:5000/api/news", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ searchText, selectedCategories }),
-        });
+        const response = await fetch(
+          "https://news-backend-1-mo4m.onrender.com/api/news",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ searchText, selectedCategories }),
+          }
+        );
         const data = await response.json();
         setArticles(data);
         setDisplayedCards(data.slice(startIndex, endIndex));
@@ -50,7 +53,7 @@ const App = () => {
       } catch (error) {
         console.error("Error fetching news:", error);
         setLoading(false);
-      
+      }
     };
     handleFetchNews();
   }, [selectedCategories, searchText, startIndex, endIndex]);
