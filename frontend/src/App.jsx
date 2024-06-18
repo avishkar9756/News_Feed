@@ -7,7 +7,7 @@ import {
   Pagination,
   Box,
   CircularProgress,
-  Typography
+  Typography,
 } from "@mui/material";
 import Sidebar from "./components/Sidebar";
 import CustomCard from "./components/CustomCard";
@@ -32,8 +32,6 @@ const App = () => {
   let startIndex = (page - 1) * cardsPerPage;
   let endIndex = startIndex + cardsPerPage;
 
- 
-
   useEffect(() => {
     const handleFetchNews = async () => {
       try {
@@ -52,10 +50,10 @@ const App = () => {
       } catch (error) {
         console.error("Error fetching news:", error);
         setLoading(false);
-      }
+      
     };
     handleFetchNews();
-  }, [selectedCategories, searchText,startIndex,endIndex]);
+  }, [selectedCategories, searchText, startIndex, endIndex]);
 
   const handlePageChange = (event, value) => {
     setPage(value);
